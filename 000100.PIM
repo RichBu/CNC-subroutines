@@ -1,31 +1,37 @@
 %Subroutine 100      ,MX---,
 (SUB 100)
-     ; G01 X0.1498 Y-0.0729 FP120
-     ; G91
-     ; G01 X0.0Y0.0 F10.0
-     ; G90
+  ; routines updated 01/23/2020 for nesting
+  ;
+  ; P148 is been re-purposed to be subroutine to call
+  ;
+  ; for backwards compatibility:
+  ; P148 = 0 call 101
+  ; P148 = 1 call 101 -- will give error if looking for ext file
+  ;
+  ; P148 = -1  skip, no cavity program
+  ;
 ; MOVE TO Z=0.100
 G90
 G01 Z+0.100 FP120
 ;
-(IF P146 EQ 0 GOTO N800)  ; IF NOT DEBUG THEN CONTINUE
-  ; DEBUG MODE
-  M0
-  ; DEBUG MODE
-N800 ;
-; CHECK IF IT IS AT THE STARTING ROW
-(IF P133 LT P147 GOTO N803)
-(IF P148 EQ 0 GOTO N801)
-;(EXEC P(102), HD)
-  (CALL 102)
-  (GOTO N803)
-N801 ; CALL INSIDE OF LOCAL PROGRAM
-  (CALL 101) ; HAVE TO DO IN MAIN PROGRAM NOW
-; (CALL 102)
-; (CALL 103)
+     (IF P146 EQ 0 GOTO N800)  ; IF NOT DEBUG THEN CONTINUE
+       ;
+       ; DEBUG MODE
+       M0
+       ; DEBUG MODE
+       ;
+N800 ; CHECK IF IT IS AT THE STARTING ROW
+     (IF P133 LT P147 GOTO N810)
+N801 ; CHECK WHAT WANT TO DO WITH P148
+     (IF P148 NE 0 GOTO N804)  ; BACKWARDS COMPATIBILITY
+     (CALL 101)  ; HAVE TO DO IN MAIN PROGRAM NOW
+     (GOTO N810) ; EXIT
+N804 (IF P148 LT 0 GOTO N810)  ; SKIP DON'T DO ANYTHING
+     (CALL P148)
 ;
 ;
-N803 ;
+;
+N810 ;
 G01 Z1.00 FP120
 G01 X0.0 Y0.0 FP115
 (RET)
