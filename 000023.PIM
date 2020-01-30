@@ -1,4 +1,4 @@
-%Subroutine 23       ,MX---,
+%Subroutine 23       ,MX--,
 (SUB 23)
   ; LSUB ROUTINE BETWEEN CAVITIES
   ; TO CALL THE Y/A FOLLOWED BY TURN BACK ON
@@ -7,8 +7,10 @@
     ; DOING POCKETS
     ; NEED TO DO ANYTHING ELSE
     ; TURN OFF THE INTERCHANGE
-    G29A
-    G72A1.00  ; 
+    G29Y
+    G72Y1.00
+    G72A1.00  ;
+    G04K50 
     (GOTO N558)
   N557 (CALL 21)
   N558 ; END OF ROUTINE
