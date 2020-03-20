@@ -13,7 +13,9 @@
   G72A1.00
   G53
   G01 ZP113 F50.00
-  G91  ; SO THAT CAN DO A JOG
+  G56
+  G01 Z4.00 F50.00
+  ;G91  ; SO THAT CAN DO A JOG
      ; 
      ;
      ;
@@ -26,6 +28,7 @@
      ; HIT GREEN CYCLE START BUTTON TO CONTINUE
      ;
      ;
+     G53
      (P295=201) ; WARMUP THE SPINDLES
      (PLCMM1200=1)
 N100 ; 
