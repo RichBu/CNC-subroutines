@@ -1,4 +1,4 @@
-%Subroutine 22       ,MX--,
+%Subroutine 22       ,MX---,
 (SUB 22) 
   ; LSUBROUTINE TO INCREMENT BETWEEN CAVITIES
   ; CALL THIS IN BETWEEN CAVITIES
@@ -16,13 +16,13 @@
       G90
       G1 Y0.0 FP115
       (IF P152 EQ 0 GOTO N548)
-        M0
+;        M0
         G01 YP105 F40.00
         (P268=PLCR156/100000.0)
         (ORGY 54=P268)
         G53
         G54
-        M0
+;        M0
         (GOTO N555)
     N548 ; POCKETS AND DIE CAVITY INCR 
     ;
