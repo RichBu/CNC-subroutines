@@ -33,6 +33,7 @@
      (PLCMM1200=1)
 N100 ; 
      ;
+     (IF PLCMM144 EQ 1 GOTO N240)
      (IF P295 EQ 201 GOTO N100)
      (IF P295 NE 600 GOTO N120)
        ;(EXEC P(009003)); DAILY
@@ -56,11 +57,11 @@ N200 ;
      ;
      ;
 N240 ;
-     ; ON STARTUP REDO THE z AXIS
-     (ORGZ 54=0.00)
-     (P113=PLCR157/100000.0)
-     (ORGZ 54=P113-4.00)
-     (ORGZ 55=P113-4.00)
+     ; ON STARTUP REDO THE z AXIS   RPB 03/30/2020
+     ;(ORGZ 54=0.00)
+     ;(P113=PLCR157/100000.0)
+     ;(ORGZ 54=P113-4.00)
+     ;(ORGZ 55=P113-4.00)
      G53
      G54
      G90 G94 G17
